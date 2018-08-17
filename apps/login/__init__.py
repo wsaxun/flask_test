@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-loginBlue = Blueprint('loginName', __name__, template_folder='templates')
+loginBlue = Blueprint('loginName', __name__)
 
 from .login import *
 from .urls import *
