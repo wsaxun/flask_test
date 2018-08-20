@@ -1,12 +1,11 @@
 from flask import Flask
 from apps.login import loginBlue
 from apps.core import coreBlue
+from apps.api import api_bp
 from config import config
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
-from .core import models as coreModels  # 让flask-migrate发现model，否则无法创建表结构
-from .login import models as loginModels
 
 
 def create_app(env):
@@ -16,6 +15,8 @@ def create_app(env):
     db.init_app(apps)
     apps.register_blueprint(loginBlue, url_prefix='/login/')  # 前缀
     apps.register_blueprint(coreBlue, url_prefix='/core/')
+    apps.register_blueprint(api_bp, url_prefix='/api/')
+    print(apps.url_map)
     return apps
 
 

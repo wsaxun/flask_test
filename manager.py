@@ -2,6 +2,8 @@ import os
 from apps import create_app, db
 from flask_script import Manager, Shell, Server
 from flask_migrate import Migrate, MigrateCommand
+from apps.core import models as coreModels  # 让flask-migrate发现model，否则无法创建表结构
+from apps.login import models as loginModels
 
 app = create_app(os.getenv('FLASK_ENV', 'default'))
 migrate = Migrate(app, db)
@@ -10,7 +12,7 @@ manager = Manager(app)
 
 @app.shell_context_processor  # 进入shell之后，可以直接使用app, xums对象
 def test():
-    return dict(app=app, xums=[])
+    return dict(app=app, loginModels=loginModels, coreModels=coreModels)
 
 
 @manager.command  # 执行hello命令是具体操作
