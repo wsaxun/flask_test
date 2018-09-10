@@ -4,6 +4,7 @@ from flask_script import Manager, Shell, Server
 from flask_migrate import Migrate, MigrateCommand
 from apps.core import models as coreModels  # 让flask-migrate发现model，否则无法创建表结构
 from apps.login import models as loginModels
+from apps.auth import models as authModels
 
 app = create_app(os.getenv('FLASK_ENV', 'default'))
 migrate = Migrate(app, db)
